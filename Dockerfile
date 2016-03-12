@@ -45,15 +45,16 @@ USER jenkins
 
 # install RVM, Ruby, and Bundler
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 && \
-	curl -L https://get.rvm.io | /bin/bash -s stable && \
+	\curl -L https://get.rvm.io | /bin/bash -s stable && \
 	/bin/bash -l -c "rvm requirements;" && \
 	/bin/bash -l -c 'source /var/jenkins_home/.rvm/scripts/rvm' && \
 	/bin/bash -l -c 'rvm install 2.2.4' && \
-	/bin/bash -l -c "rvm use --default 2.2.4 && \
-	gem install bundler"
+	/bin/bash -l -c 'rvm use --default 2.2.4' && \
+	/bin/bash -l -c 'gem install bundler'
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/ref/plugins.txt
 
 EXPOSE 22
 CMD ["/run.sh"]
+ENTRYPOINT ["/bin/bash"]
