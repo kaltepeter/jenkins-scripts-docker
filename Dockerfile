@@ -17,6 +17,8 @@ RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSep
   && touch /root/.Xauthority \
   && true
 
+RUN echo "jenkins:jenkins" | chpasswd
+
 RUN rm /etc/ssh/ssh_host_*
 RUN dpkg-reconfigure openssh-server
 RUN ssh-keygen -A
@@ -50,6 +52,8 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A170311380
 	/bin/bash -l -c 'source /var/jenkins_home/.rvm/scripts/rvm' && \
 	/bin/bash -l -c 'rvm install 2.2.4' && \
 	/bin/bash -l -c 'rvm use --default 2.2.4' && \
+	/bin/bash -l -c 'echo "source $HOME/.rvm/scripts/rvm" >> ~/.bash_profile' && \
+	/bin/bash -l -c '. ~/.bash_profile' && \
 	/bin/bash -l -c 'gem install bundler'
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
