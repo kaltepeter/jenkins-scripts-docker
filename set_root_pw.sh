@@ -14,7 +14,7 @@ for MYHOME in /var/jenkins_home /home/docker /home/git; do
 	echo "=> Done!"
 done
 chown -Rf docker:docker /home/docker/.ssh
-cat ~/.ssh/id_rsa.pub | ssh -p 2222 docker@192.168.99.101 "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh -p 2222 root@$(docker-machine ip) "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
 
 echo "========================================================================"
 echo "You can now connect to this container via SSH using:"
