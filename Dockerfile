@@ -60,5 +60,5 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/ref/plugins.txt
 
 EXPOSE 22
-CMD ["/run.sh"]
-ENTRYPOINT ["/bin/bash"]
+EXPOSE 8080
+CMD ["/bin/bash", "-c", "sh /run.sh"]
