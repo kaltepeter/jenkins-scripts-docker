@@ -1,7 +1,7 @@
 FROM jenkins:latest
 MAINTAINER Kayla Altepeter <kayla.altepeter@merrillcorp.com>
 USER root
-RUN apt-get -y update && DEBIAN_FRONTEND=noninteractive
+RUN apt-get clean && apt-get -y update && DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y nginx openssh-server git-core openssh-client curl sudo
 RUN apt-get install -y nano
 RUN apt-get install -y patch bzip2 gawk g++ gcc make libc6-dev patch libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev
